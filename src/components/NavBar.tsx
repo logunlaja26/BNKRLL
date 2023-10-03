@@ -9,11 +9,14 @@ const NavBar = () => {
 
   return (
     <HStack spacing={6} direction="row" align="center">
-      <Button onClick={handleClick} colorScheme="whiteAlpha">
+      <Button onClick={handleClick} colorScheme="blue">
         Login
       </Button>
       <Button onClick={() => navigate("/register")} colorScheme="blue">
         Register
+      </Button>
+      <Button onClick={() => navigate("/Session")} colorScheme="blue">
+        Session
       </Button>
     </HStack>
   );
