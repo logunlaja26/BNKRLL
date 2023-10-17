@@ -1,19 +1,17 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Session from "./pages/Session";
+import pageroutes from "./data/pageroutes";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* This is the base home default route */}
         <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/session" element={<Session />} />
+        {pageroutes.map((route, index) => (
+          <Route key={index} path={route.path} element={route.component} />
+        ))}
       </Routes>
     </BrowserRouter>
   );

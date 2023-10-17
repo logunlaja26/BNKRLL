@@ -1,5 +1,4 @@
 import {
-  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -7,18 +6,19 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 const Session = () => {
+  const navigate = useNavigate();
   return (
     <>
       <NavBar />
-
       <VStack spacing={4} alignItems="center">
         <h1>Start a live session</h1>
         <form>
           <FormControl isRequired>
-            <FormLabel>type</FormLabel>
-            <Input type="text" placeholder="type" />
+            <FormLabel>pay-type</FormLabel>
+            <Input type="text" placeholder="pay-type" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>game</FormLabel>
@@ -40,7 +40,10 @@ const Session = () => {
             <FormLabel>location</FormLabel>
             <Input type="tel" placeholder="location" />
           </FormControl>
-          <Button type="submit" colorScheme="teal">
+          <Button
+            type="submit"
+            colorScheme="teal"
+            onClick={() => navigate("/livesession")}>
             Start Session
           </Button>
         </form>
