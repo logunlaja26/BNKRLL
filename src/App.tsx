@@ -1,19 +1,41 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import pageroutes from "./data/pageroutes";
+import { useState } from "react";
+import Session from "./pages/Session";
+import LiveSession from "./pages/LiveSession";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+// interface Session {
+//   buyinValue: number;
+// }
 
 function App() {
+  //const [session, setSession] = useState<Session>({} as Session);
+  const [formData, setFormData] = useState<number>(0);
+
+  const handleFormSubmit = (data: number) => {
+    setFormData(data);
+  };
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* This is the base home default route */}
-        <Route index element={<Home />} />
-        {pageroutes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.component} />
-        ))}
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/session"
+            element={<Session onFormSubmit={handleFormSubmit} />}
+          />
+          <Route
+            path="/livesession"
+            element={<LiveSession inputData={formData} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
