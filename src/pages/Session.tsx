@@ -9,24 +9,41 @@ import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 
+interface FormData {
+  name: string;
+  email: string;
+  limit: string[];
+  payType: string[];
+  gameType: string;
+  location: string;
+  buyin: number;
+  profit: number;
+  message: string;
+}
+
 interface Props {
-  onFormSubmit: (data: number) => void;
+  onFormSubmit: (data: FormData) => void;
 }
 
 const Session = ({ onFormSubmit }: Props) => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "testing 1 ..",
-    email: "testing 2...",
-    message: "testing 3...",
+  const [formData, setFormData] = useState<FormData>({
+    name: "jeff",
+    email: "logunlaja26@gmail.com",
+    limit: ["NO_LIMIT", "POT_LIMIT"],
+    gameType: "Texas_Hold_em",
+    payType: ["CASH", "TOURNEY"],
+    location: "",
     buyin: 0,
+    profit: 0,
+    message: "testing 3...",
   });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     //console.log("submitted...", formData.buyin);
-    onFormSubmit(formData.buyin);
+    onFormSubmit(formData);
     navigate("/livesession");
   };
 
@@ -68,7 +85,17 @@ const Session = ({ onFormSubmit }: Props) => {
           </FormControl>
           <FormControl>
             <FormLabel>location</FormLabel>
-            <Input type="tel" placeholder="location" />
+            <Input
+              type="tel"
+              placeholder="location"
+              value={formData.location}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  location: e.target.value,
+                })
+              }
+            />
           </FormControl>
           <Button type="submit" colorScheme="teal">
             Start Session

@@ -7,16 +7,23 @@ import LiveSession from "./pages/LiveSession";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-// interface Session {
-//   buyinValue: number;
-// }
+interface FormData {
+  name: string;
+  email: string;
+  limit: string[];
+  payType: string[];
+  gameType: string;
+  location: string;
+  buyin: number;
+  profit: number;
+  message: string;
+}
 
 function App() {
-  //const [session, setSession] = useState<Session>({} as Session);
-  const [formData, setFormData] = useState<number>(0);
+  const [dataList, setDataList] = useState<FormData>({} as FormData);
 
-  const handleFormSubmit = (data: number) => {
-    setFormData(data);
+  const handleFormSubmit = (formData: FormData) => {
+    setDataList(formData);
   };
   return (
     <>
@@ -31,7 +38,7 @@ function App() {
           />
           <Route
             path="/livesession"
-            element={<LiveSession inputData={formData} />}
+            element={<LiveSession data={dataList} />}
           />
         </Routes>
       </BrowserRouter>

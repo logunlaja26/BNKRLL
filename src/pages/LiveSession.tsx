@@ -1,15 +1,23 @@
 import { Box, Button, Center, Grid, Text, Textarea } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 
-interface Props {
-  inputData: number;
+interface FormData {
+  name: string;
+  email: string;
+  limit: string[];
+  payType: string[];
+  gameType: string;
+  location: string;
+  buyin: number;
+  profit: number;
+  message: string;
 }
 
-const LiveSession = ({ inputData }: Props) => {
-  const handleSubmit = () => {
-    console.log("buyin value.....", inputData);
-  };
+interface Props {
+  data: FormData;
+}
 
+const LiveSession = ({ data }: Props) => {
   return (
     <>
       <NavBar />
@@ -21,8 +29,7 @@ const LiveSession = ({ inputData }: Props) => {
             borderRadius="md"
             boxShadow="md"
             bg="white">
-            {inputData}
-            {/* <Text>{buyinValue}</Text> */}
+            {data.buyin}
             {/* Place your data display components or content here */}
           </Box>
         </Center>
@@ -33,7 +40,7 @@ const LiveSession = ({ inputData }: Props) => {
             borderRadius="md"
             boxShadow="md"
             bg="blue">
-            <Text>Data Display Area 2</Text>
+            <Text>{data.location}</Text>
             {/* Place your data display components or content here */}
           </Box>
         </Center>
