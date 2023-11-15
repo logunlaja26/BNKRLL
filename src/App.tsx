@@ -21,15 +21,17 @@ interface FormData {
 
 function App() {
   const [dataList, setDataList] = useState<FormData>({} as FormData);
+  const [serveList, setServeList] = useState<FormData[]>([]);
 
   const handleFormSubmit = (formData: FormData) => {
     setDataList(formData);
+    setServeList([...serveList, formData]);
   };
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index path="/home" element={<Home dataDb={serveList} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

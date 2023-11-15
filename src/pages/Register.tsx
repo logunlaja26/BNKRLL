@@ -6,7 +6,7 @@ const Register = () => {
     <>
       <NavBar />
       <div>
-        <Heading>The register page</Heading>
+        <Heading my="30px">The register page</Heading>
       </div>
     </>
   );
