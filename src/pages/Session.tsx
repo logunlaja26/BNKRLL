@@ -14,12 +14,13 @@ import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { FormEvent, useState } from "react";
+import axios from "axios";
 
 interface FormData {
   name: string;
   email: string;
-  limit: string[];
-  payType: string[];
+  limit: string;
+  payType: string;
   gameType: string;
   location: string;
   buyin: number;
@@ -35,21 +36,25 @@ const Session = ({ onFormSubmit }: Props) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<FormData>({
-    name: "jeff",
-    email: "logunlaja26@gmail.com",
-    limit: ["NO_LIMIT", "POT_LIMIT"],
-    gameType: "Texas_Hold_em",
-    payType: ["CASH", "TOURNEY"],
+    name: "John",
+    email: "johndoe@gmail.com",
+    limit: "NO_LIMIT",
+    gameType: "TEXAS_HOLD_EM",
+    payType: "CASH",
     location: "",
     buyin: 0,
     profit: 0,
-    message: "testing 3...",
+    message: "any additional message...",
   });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(formData);
     onFormSubmit(formData);
+    axios.post<FormData, { message: string }>(
+      "http://localhost:8080/api/session/submit-session",
+      formData
+    );
     navigate("/livesession");
   };
 
@@ -65,18 +70,16 @@ const Session = ({ onFormSubmit }: Props) => {
                 pay-type
               </FormLabel>
               <Menu>
-                <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-                  {/* Actions */}
-                </MenuButton>
+                <MenuButton
+                  as={Button}
+                  rightIcon={<BsChevronDown />}></MenuButton>
                 <MenuList>
                   <MenuItem>NO_LIMIT</MenuItem>
                   <MenuItem>POT_LIMIT</MenuItem>
                 </MenuList>
               </Menu>
-              {/* <Input type="text" placeholder="pay-type" /> */}
             </FormControl>
             <FormControl>
-              {/* <FormLabel textAlign="center">game</FormLabel> */}
               <Input
                 type="text"
                 placeholder="game"
@@ -85,7 +88,6 @@ const Session = ({ onFormSubmit }: Props) => {
               />
             </FormControl>
             <FormControl>
-              {/* <FormLabel textAlign="center">limit</FormLabel> */}
               <Input
                 type="number"
                 placeholder="limit"
@@ -94,7 +96,6 @@ const Session = ({ onFormSubmit }: Props) => {
               />
             </FormControl>
             <FormControl>
-              {/* <FormLabel textAlign="center">stakes</FormLabel> */}
               <Input
                 type="number"
                 placeholder="stakes"
@@ -103,7 +104,6 @@ const Session = ({ onFormSubmit }: Props) => {
               />
             </FormControl>
             <FormControl isRequired>
-              {/* <FormLabel textAlign="center">buy-in</FormLabel> */}
               <Input
                 fontWeight="bold"
                 textAlign="center"
@@ -119,7 +119,6 @@ const Session = ({ onFormSubmit }: Props) => {
               />
             </FormControl>
             <FormControl>
-              {/* <FormLabel textAlign="center">location</FormLabel> */}
               <Input
                 fontWeight="bold"
                 textAlign="center"
