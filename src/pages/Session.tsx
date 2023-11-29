@@ -15,18 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { FormEvent, useState } from "react";
 import axios from "axios";
-
-interface FormData {
-  name: string;
-  email: string;
-  limit: string;
-  payType: string;
-  gameType: string;
-  location: string;
-  buyin: number;
-  profit: number;
-  message: string;
-}
+import FormData from "../components/FormData";
 
 interface Props {
   onFormSubmit: (data: FormData) => void;
@@ -43,7 +32,7 @@ const Session = ({ onFormSubmit }: Props) => {
     payType: "CASH",
     location: "",
     buyin: 0,
-    profit: 0,
+    gameProfit: 1000,
     message: "any additional message...",
   });
 

@@ -8,18 +8,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
-
-interface FormData {
-  name: string;
-  email: string;
-  limit: string[];
-  payType: string[];
-  gameType: string;
-  location: string;
-  buyin: number;
-  profit: number;
-  message: string;
-}
+import FormData from "../components/FormData";
 
 interface Props {
   data: FormData;
@@ -39,7 +28,6 @@ const LiveSession = ({ data }: Props) => {
               boxShadow="md"
               bg="grey">
               {data.buyin}
-              {/* Place your data display components or content here */}
             </Box>
           </Center>
           <Center>
@@ -50,7 +38,6 @@ const LiveSession = ({ data }: Props) => {
               boxShadow="md"
               bg="grey">
               <Text>{data.location}</Text>
-              {/* Place your data display components or content here */}
             </Box>
           </Center>
           <Center>
@@ -63,7 +50,6 @@ const LiveSession = ({ data }: Props) => {
               boxShadow="md"
               bg="grey">
               <Text>{data.payType}</Text>
-              {/* Place your data display components or content here */}
             </Box>
             <Box
               width="300px"
@@ -73,7 +59,6 @@ const LiveSession = ({ data }: Props) => {
               boxShadow="md"
               bg="grey">
               <Text>break</Text>
-              {/* Place your data display components or content here */}
             </Box>
           </Center>
           <Box>
