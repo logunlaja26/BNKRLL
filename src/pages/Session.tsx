@@ -63,8 +63,24 @@ const Session = ({ onFormSubmit }: Props) => {
                   as={Button}
                   rightIcon={<BsChevronDown />}></MenuButton>
                 <MenuList>
-                  <MenuItem>NO_LIMIT</MenuItem>
-                  <MenuItem>POT_LIMIT</MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        payType: "CASH",
+                      })
+                    }>
+                    CASH
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        payType: "TOURNEY",
+                      })
+                    }>
+                    TOURNEY
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </FormControl>
