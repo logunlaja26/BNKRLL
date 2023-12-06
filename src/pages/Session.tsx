@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormLabel,
   Input,
   Button,
   VStack,
@@ -55,13 +54,10 @@ const Session = ({ onFormSubmit }: Props) => {
         <Container maxWidth="2xs" py="50px">
           <form onSubmit={handleSubmit}>
             <FormControl>
-              <FormLabel textAlign="center" fontWeight="bold">
-                pay-type
-              </FormLabel>
               <Menu>
-                <MenuButton
-                  as={Button}
-                  rightIcon={<BsChevronDown />}></MenuButton>
+                <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+                  PAY
+                </MenuButton>
                 <MenuList>
                   <MenuItem
                     onClick={() =>
@@ -85,12 +81,14 @@ const Session = ({ onFormSubmit }: Props) => {
               </Menu>
             </FormControl>
             <FormControl>
-              <Input
-                type="text"
-                placeholder="game"
-                textAlign="center"
-                fontWeight="bold"
-              />
+              <Menu>
+                <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+                  GAME
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>TEXAS_HOLD_EM</MenuItem>
+                </MenuList>
+              </Menu>
             </FormControl>
             <FormControl>
               <Input
