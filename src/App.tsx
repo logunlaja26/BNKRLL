@@ -6,32 +6,21 @@ import Session from "./pages/Session";
 import LiveSession from "./pages/LiveSession";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
-interface FormData {
-  name: string;
-  email: string;
-  limit: string[];
-  payType: string[];
-  gameType: string;
-  location: string;
-  buyin: number;
-  profit: number;
-  message: string;
-}
+import FormData from "./components/FormData";
 
 function App() {
   const [dataList, setDataList] = useState<FormData>({} as FormData);
-  const [serveList, setServeList] = useState<FormData[]>([]);
 
-  const handleFormSubmit = (formData: FormData) => {
+  const handleFormSubmit = async (formData: FormData) => {
     setDataList(formData);
-    setServeList([...serveList, formData]);
+    console.log("rest call data ....", formData);
   };
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route index path="/home" element={<Home dataDb={serveList} />} />
+          <Route index path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
