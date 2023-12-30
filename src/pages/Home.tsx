@@ -7,9 +7,6 @@ const Home = () => {
       <NavBar />
       <div>
         <Heading>This the main paige</Heading>
-        <div>
-          <h2>Data List</h2>
-        </div>
       </div>
     </>
   );

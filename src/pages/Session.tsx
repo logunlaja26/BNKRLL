@@ -8,6 +8,11 @@ import {
   MenuList,
   MenuItem,
   Container,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +27,12 @@ interface Props {
 
 const Session = ({ onFormSubmit }: Props) => {
   const navigate = useNavigate();
+
+  // const format = (val: string) => `$` + val;
+  // const parse = (val: string) => val.replace(/^\$/, "");
+  const format = (val: number) => `$` + val;
+  console.log("this us format", format);
+  const parse = (val: number) => val.replace(/^\$/, "");
 
   const [formData, setFormData] = useState<FormData>({
     name: "John",
@@ -107,7 +118,7 @@ const Session = ({ onFormSubmit }: Props) => {
               />
             </FormControl>
             <FormControl isRequired>
-              <Input
+              {/* <Input
                 fontWeight="bold"
                 textAlign="center"
                 type="number"
@@ -119,7 +130,35 @@ const Session = ({ onFormSubmit }: Props) => {
                     buyin: parseInt(e.target.value),
                   })
                 }
-              />
+              /> */}
+              {/* <NumberInput
+                fontWeight="bold"
+                inputMode="numeric"
+                textAlign="center"
+                value={1 || formData.buyin}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    buyin: parseInt(e.target.value),
+                  })
+                }></NumberInput> */}
+            </FormControl>
+            <FormControl>
+              <NumberInput
+                textAlign="center"
+                onChange={(valueString) =>
+                  setFormData({
+                    ...formData,
+                    buyin: parse(valueString),
+                  })
+                }
+                value={format(formData.buyin)}>
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
             </FormControl>
             <FormControl>
               <Input
