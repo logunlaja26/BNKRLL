@@ -8,11 +8,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Spacer,
   Center,
   Heading,
@@ -31,12 +26,6 @@ interface Props {
 
 const Session = ({ onFormSubmit }: Props) => {
   const navigate = useNavigate();
-  const format = (val: number) => `$` + val;
-  const parse = (val: number) => {
-    const stringValue = val.toString();
-    return stringValue.replace(/^\$/, "");
-  };
-
   const generateRandomUuid = (): string => {
     return uuidv4();
   };
@@ -49,7 +38,7 @@ const Session = ({ onFormSubmit }: Props) => {
     gameType: "TEXAS_HOLD_EM",
     payType: "CASH",
     location: "",
-    buyin: 0,
+    buyin: NaN,
     gameProfit: 1000,
     message: "any additional message...",
   });
@@ -155,22 +144,17 @@ const Session = ({ onFormSubmit }: Props) => {
                 <Spacer />
               </FormControl>
               <FormControl>
-                <NumberInput
+                <Input
                   textAlign="center"
+                  type="number"
                   inputMode="numeric"
-                  onChange={(valueString) =>
+                  value={formData.buyin}
+                  onChange={(e) =>
                     setFormData({
                       ...formData,
-                      buyin: parse(valueString),
+                      buyin: parseInt(e.target.value),
                     })
-                  }
-                  value={format(formData.buyin)}>
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
+                  }></Input>
               </FormControl>
               <FormControl>
                 <Input

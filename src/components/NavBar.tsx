@@ -15,9 +15,9 @@ import { FaSignOutAlt } from "react-icons/fa";
 const NavBar = () => {
   const navigate = useNavigate();
 
-  function handleLoginClick() {
-    navigate("/login");
-  }
+  // function handleLoginClick() {
+  //   navigate("/login");
+  // }
 
   return (
     <>
