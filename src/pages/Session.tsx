@@ -1,23 +1,26 @@
 import {
+  Container,
+  VStack,
   FormControl,
   Input,
   Button,
-  VStack,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Container,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  Spacer,
+  Center,
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { FormEvent, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import FormData from "../components/FormData";
 
@@ -27,14 +30,18 @@ interface Props {
 
 const Session = ({ onFormSubmit }: Props) => {
   const navigate = useNavigate();
-
-  // const format = (val: string) => `$` + val;
-  // const parse = (val: string) => val.replace(/^\$/, "");
   const format = (val: number) => `$` + val;
-  console.log("this us format", format);
-  const parse = (val: number) => val.replace(/^\$/, "");
+  const parse = (val: number) => {
+    const stringValue = val.toString();
+    return stringValue.replace(/^\$/, "");
+  };
+
+  const generateRandomUuid = (): string => {
+    return uuidv4();
+  };
 
   const [formData, setFormData] = useState<FormData>({
+    sessionId: generateRandomUuid(),
     name: "John",
     email: "johndoe@gmail.com",
     limit: "NO_LIMIT",
@@ -50,6 +57,7 @@ const Session = ({ onFormSubmit }: Props) => {
     e.preventDefault();
     console.log(formData);
     onFormSubmit(formData);
+    console.log("THis is the uuid...", formData.sessionId);
     axios.post<FormData, { message: string }>(
       "http://localhost:8080/api/session/submit-session",
       formData
@@ -60,125 +68,129 @@ const Session = ({ onFormSubmit }: Props) => {
   return (
     <>
       <NavBar />
-      <VStack spacing={4} alignItems="center">
-        <h1>Start a live session</h1>
-        <Container maxWidth="2xs" py="50px">
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <Menu>
-                <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-                  PAY
-                </MenuButton>
-                <MenuList>
-                  <MenuItem
-                    onClick={() =>
-                      setFormData({
-                        ...formData,
-                        payType: "CASH",
-                      })
-                    }>
-                    CASH
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() =>
-                      setFormData({
-                        ...formData,
-                        payType: "TOURNEY",
-                      })
-                    }>
-                    TOURNEY
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </FormControl>
-            <FormControl>
-              <Menu>
-                <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-                  GAME
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>TEXAS_HOLD_EM</MenuItem>
-                </MenuList>
-              </Menu>
-            </FormControl>
-            <FormControl>
-              <Input
-                type="number"
-                placeholder="limit"
-                textAlign="center"
-                fontWeight="bold"
-              />
-            </FormControl>
-            <FormControl>
-              <Input
-                type="number"
-                placeholder="stakes"
-                textAlign="center"
-                fontWeight="bold"
-              />
-            </FormControl>
-            <FormControl isRequired>
-              {/* <Input
-                fontWeight="bold"
-                textAlign="center"
-                type="number"
-                placeholder="buy-in"
-                value={formData.buyin}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    buyin: parseInt(e.target.value),
-                  })
-                }
-              /> */}
-              {/* <NumberInput
-                fontWeight="bold"
-                inputMode="numeric"
-                textAlign="center"
-                value={1 || formData.buyin}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    buyin: parseInt(e.target.value),
-                  })
-                }></NumberInput> */}
-            </FormControl>
-            <FormControl>
-              <NumberInput
-                textAlign="center"
-                onChange={(valueString) =>
-                  setFormData({
-                    ...formData,
-                    buyin: parse(valueString),
-                  })
-                }
-                value={format(formData.buyin)}>
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-            </FormControl>
-            <FormControl>
-              <Input
-                fontWeight="bold"
-                textAlign="center"
-                type="tel"
-                placeholder="location"
-                value={formData.location}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    location: e.target.value,
-                  })
-                }
-              />
-            </FormControl>
-            <Button type="submit" colorScheme="blue">
-              Start Session
-            </Button>
-          </form>
+      <VStack
+        spacing={6}
+        alignItems="center"
+        p={4}
+        bg="whitesmoke"
+        h="100vh"
+        justify="center">
+        <h1 style={{ color: "black" }}>Start a live session</h1>
+        <Container
+          //maxWidth="2xs"
+          maxWidth="md"
+          p={6}
+          bg="white"
+          borderRadius="md"
+          boxShadow="md">
+          <Center>
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rightIcon={<BsChevronDown />}
+                    variant="outline"
+                    size="md"
+                    width="100%"
+                    colorScheme="blue">
+                    PAY
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          payType: "CASH",
+                        })
+                      }>
+                      CASH
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          payType: "TOURNEY",
+                        })
+                      }>
+                      TOURNEY
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </FormControl>
+              <FormControl>
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rightIcon={<BsChevronDown />}
+                    variant="outline"
+                    size="md"
+                    width="100%"
+                    colorScheme="blue">
+                    GAME
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>TEXAS_HOLD_EM</MenuItem>
+                  </MenuList>
+                </Menu>
+              </FormControl>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Limit"
+                  textAlign="center"
+                  fontWeight="bold"
+                />
+              </FormControl>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Stakes"
+                  textAlign="center"
+                  fontWeight="bold"
+                />
+              </FormControl>
+              <FormControl>
+                <Spacer />
+              </FormControl>
+              <FormControl>
+                <NumberInput
+                  textAlign="center"
+                  inputMode="numeric"
+                  onChange={(valueString) =>
+                    setFormData({
+                      ...formData,
+                      buyin: parse(valueString),
+                    })
+                  }
+                  value={format(formData.buyin)}>
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </FormControl>
+              <FormControl>
+                <Input
+                  fontWeight="bold"
+                  textAlign="center"
+                  type="tel"
+                  placeholder="Location"
+                  value={formData.location}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      location: e.target.value,
+                    })
+                  }
+                />
+              </FormControl>
+              <Button type="submit" colorScheme="blue" mt={4}>
+                Start Session
+              </Button>
+            </form>
+          </Center>
         </Container>
       </VStack>
     </>
