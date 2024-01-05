@@ -6,7 +6,7 @@ const Login = () => {
     <>
       <NavBar />
       <div>
-        <Heading>Login page...</Heading>
+        <Heading>Coming Soon...</Heading>
       </div>
     </>
   );

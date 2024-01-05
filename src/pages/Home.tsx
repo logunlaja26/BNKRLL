@@ -1,13 +1,13 @@
-import { Heading } from "@chakra-ui/react";
-import NavBar from "../components/NavBar";
+import FormData from "../components/FormData";
+import Session from "./Session";
 
 const Home = () => {
+  const handleFormSubmit = (formData: FormData) => {
+    console.log("Form submitted with data:", formData);
+  };
   return (
     <>
-      <NavBar />
-      <div>
-        <Heading>This the main paige</Heading>
-      </div>
+      <Session onFormSubmit={handleFormSubmit} />
     </>
   );
 };

@@ -15,6 +15,7 @@ import {
   NumberDecrementStepper,
   Spacer,
   Center,
+  Heading,
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
@@ -75,7 +76,7 @@ const Session = ({ onFormSubmit }: Props) => {
         bg="whitesmoke"
         h="100vh"
         justify="center">
-        <h1 style={{ color: "black" }}>Start a live session</h1>
+        <Heading>Start a live session</Heading>
         <Container
           //maxWidth="2xs"
           maxWidth="md"

@@ -7,13 +7,13 @@ import LiveSession from "./pages/LiveSession";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import FormData from "./components/FormData";
+import Progress from "./pages/Progress";
 
 function App() {
   const [dataList, setDataList] = useState<FormData>({} as FormData);
 
   const handleFormSubmit = async (formData: FormData) => {
     setDataList(formData);
-    console.log("rest call data ....", formData);
   };
 
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/progress" element={<Progress />} />
           <Route
             path="/session"
             element={<Session onFormSubmit={handleFormSubmit} />}

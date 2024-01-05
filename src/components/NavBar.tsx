@@ -24,33 +24,40 @@ const NavBar = () => {
       <Grid bg="blue.500" p="3">
         <Flex alignItems="center">
           <Stack spacing={4} direction="row">
-            <Button
+            {/* <Button
               colorScheme="whiteAlpha"
               variant="ghost"
               onClick={handleLoginClick}
               _hover={{ color: "white" }}>
               Login
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               colorScheme="whiteAlpha"
               variant="ghost"
               onClick={() => navigate("/home")}
               _hover={{ color: "white" }}>
               Home
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               colorScheme="whiteAlpha"
               variant="ghost"
               onClick={() => navigate("/register")}
               _hover={{ color: "white" }}>
               Register
-            </Button>
+            </Button> */}
             <Button
               colorScheme="whiteAlpha"
               variant="ghost"
               onClick={() => navigate("/Session")}
               _hover={{ color: "white" }}>
               Session
+            </Button>
+            <Button
+              colorScheme="whiteAlpha"
+              variant="ghost"
+              onClick={() => navigate("/progress")}
+              _hover={{ color: "white" }}>
+              Progress
             </Button>
           </Stack>
 
