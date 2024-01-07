@@ -37,7 +37,7 @@ const Progress = () => {
   return (
     <>
       <NavBar />
-      <h3>Here are you accumulated results</h3>
+      <h3>Here are your accumulated results</h3>
       <Container>
         <Center>
           <LineChart width={600} height={500} data={data}>
