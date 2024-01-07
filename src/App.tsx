@@ -22,6 +22,10 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/livesession"
+            element={<LiveSession data={dataList} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/progress" element={<Progress />} />
           <Route

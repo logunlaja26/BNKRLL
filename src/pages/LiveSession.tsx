@@ -28,11 +28,11 @@ const LiveSession = ({ data }: Props) => {
                 borderWidth="1px"
                 borderRadius="md"
                 boxShadow="md"
-                bg="blue.100"
+                bg="blue.500"
                 width="100%"
                 textAlign="center"
                 fontWeight="bold">
-                Buy-in: {data.buyin}
+                Buy-in: {data.buyin ? data.buyin : ""}
               </Box>
             </Center>
             <Center>
@@ -41,7 +41,7 @@ const LiveSession = ({ data }: Props) => {
                 borderWidth="1px"
                 borderRadius="md"
                 boxShadow="md"
-                bg="blue.100"
+                bg="blue.500"
                 width="100%"
                 textAlign="center"
                 fontWeight="bold">
@@ -56,7 +56,7 @@ const LiveSession = ({ data }: Props) => {
                 borderWidth="1px"
                 borderRadius="md"
                 boxShadow="md"
-                bg="blue.100"
+                bg="blue.500"
                 textAlign="center"
                 fontWeight="bold">
                 Payment Type: {data.payType}
@@ -70,7 +70,7 @@ const LiveSession = ({ data }: Props) => {
                 boxShadow="md"
                 textAlign="center"
                 fontWeight="bold"
-                bg="blue.100">
+                bg="blue.500">
                 Details
               </Box>
             </Center>

@@ -55,6 +55,13 @@ const NavBar = () => {
             <Button
               colorScheme="whiteAlpha"
               variant="ghost"
+              onClick={() => navigate("/livesession")}
+              _hover={{ color: "white" }}>
+              Live
+            </Button>
+            <Button
+              colorScheme="whiteAlpha"
+              variant="ghost"
               onClick={() => navigate("/progress")}
               _hover={{ color: "white" }}>
               Progress
