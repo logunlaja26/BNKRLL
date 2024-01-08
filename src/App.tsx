@@ -32,10 +32,6 @@ function App() {
             path="/session"
             element={<Session onFormSubmit={handleFormSubmit} />}
           />
-          <Route
-            path="/livesession"
-            element={<LiveSession data={dataList} />}
-          />
         </Routes>
       </BrowserRouter>
     </>

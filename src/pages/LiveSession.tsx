@@ -9,12 +9,68 @@ import {
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 import FormData from "../components/FormData";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface Props {
   data: FormData;
 }
 
+// function handleLoginClick() {
+//   axios.get<FormData, { message: string }>(
+//     "http://localhost:8080/api/session/submit-session"
+//   );
+// }
+
 const LiveSession = ({ data }: Props) => {
+  const [session, setSession] = useState<FormData[]>([]);
+
+  useEffect(() => {
+    // Fetch sessions when the component mounts
+    const fetchSessions = async () => {
+      const controller = new AbortController();
+      try {
+        const response = await axios.get<FormData[]>(
+          "http://localhost:8080/api/session",
+          { signal: controller.signal }
+        );
+        setSession(response.data);
+        console.log("Fetch session response: ", response);
+        console.log("session object", session);
+      } catch (error) {
+        console.error("Error fetching sessions:", error);
+      }
+    };
+
+    fetchSessions();
+
+    return () => {
+      setSession([]);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   let mounted = true;
+  //   const fetchSessions = async () => {
+  //     try {
+  //       const response = await axios.get<FormData[]>(
+  //         "http://localhost:8080/api/session"
+  //       );
+  //       if (!mounted) return;
+  //       setSession(response.data);
+  //       console.log("Fetch session response: ", response);
+  //     } catch (error) {
+  //       console.error("Error fetching sessions:", error);
+  //     }
+  //   };
+
+  //   fetchSessions();
+
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, []);
+
   return (
     <>
       <NavBar />
@@ -45,7 +101,7 @@ const LiveSession = ({ data }: Props) => {
                 width="100%"
                 textAlign="center"
                 fontWeight="bold">
-                Location: {data.location}
+                Location: {session.map((s) => s.location)}
               </Box>
             </Center>
             <Center>
