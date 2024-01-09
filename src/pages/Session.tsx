@@ -15,9 +15,8 @@ import {
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
 import FormData from "../components/FormData";
 
 interface Props {
@@ -45,29 +44,9 @@ const Session = ({ onFormSubmit }: Props) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    axios.post<FormData, { message: string }>(
-      "http://localhost:8080/api/session/submit-session",
-      formData
-    );
     onFormSubmit(formData);
     navigate("/livesession");
   };
-
-  // useEffect(() => {
-  //   const fetchSessionData = async () => {
-  //     try {
-  //       const response = await axios.post<FormData>(
-  //         "http://localhost:8080/api/session/submit-session",
-  //         formData
-  //       );
-  //       setFormData(response.data);
-  //     } catch (error) {
-  //       console.error("Error submitting session:", error);
-  //     }
-  //   };
-
-  //   fetchSessionData();
-  // }, []);
 
   return (
     <>

@@ -16,60 +16,39 @@ interface Props {
   data: FormData;
 }
 
-// function handleLoginClick() {
-//   axios.get<FormData, { message: string }>(
-//     "http://localhost:8080/api/session/submit-session"
-//   );
-// }
-
 const LiveSession = ({ data }: Props) => {
   const [session, setSession] = useState<FormData[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Fetch sessions when the component mounts
     const fetchSessions = async () => {
       const controller = new AbortController();
       try {
+        setLoading(true);
+
+        const postResponse = await axios.post<FormData>(
+          "http://localhost:8080/api/session/submit-session",
+          data
+        );
+        console.log("Result from the POST response: ", postResponse);
+
         const response = await axios.get<FormData[]>(
           "http://localhost:8080/api/session",
           { signal: controller.signal }
         );
         setSession(response.data);
-        console.log("Fetch session response: ", response);
-        console.log("session object", session);
+        console.log("Result from the GET response: ", response.data);
       } catch (error) {
         console.error("Error fetching sessions:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchSessions();
-
-    return () => {
-      setSession([]);
-    };
-  }, []);
-
-  // useEffect(() => {
-  //   let mounted = true;
-  //   const fetchSessions = async () => {
-  //     try {
-  //       const response = await axios.get<FormData[]>(
-  //         "http://localhost:8080/api/session"
-  //       );
-  //       if (!mounted) return;
-  //       setSession(response.data);
-  //       console.log("Fetch session response: ", response);
-  //     } catch (error) {
-  //       console.error("Error fetching sessions:", error);
-  //     }
-  //   };
-
-  //   fetchSessions();
-
-  //   return () => {
-  //     mounted = false;
-  //   };
-  // }, []);
+    if (data) {
+      fetchSessions();
+    }
+  }, [data]);
 
   return (
     <>
@@ -88,7 +67,7 @@ const LiveSession = ({ data }: Props) => {
                 width="100%"
                 textAlign="center"
                 fontWeight="bold">
-                Buy-in: {data.buyin ? data.buyin : ""}
+                Buy-in: {session.map((s) => s.buyin)}
               </Box>
             </Center>
             <Center>
@@ -115,7 +94,7 @@ const LiveSession = ({ data }: Props) => {
                 bg="blue.500"
                 textAlign="center"
                 fontWeight="bold">
-                Payment Type: {data.payType}
+                Payment Type: {session.map((s) => s.payType)}
               </Box>
               <Box
                 width="300px"
