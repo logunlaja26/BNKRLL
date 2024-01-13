@@ -9,12 +9,46 @@ import {
 } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 import FormData from "../components/FormData";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface Props {
   data: FormData;
 }
 
 const LiveSession = ({ data }: Props) => {
+  const [session, setSession] = useState<FormData[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchSessions = async () => {
+      const controller = new AbortController();
+      try {
+        setLoading(true);
+        const postResponse = await axios.post<FormData>(
+          "http://52.15.68.122:8080/api/session/submit-session",
+          data
+        );
+        console.log("Result from the POST response: ", postResponse);
+
+        const response = await axios.get<FormData[]>(
+          "http://52.15.68.122:8080/api/session/1",
+          { signal: controller.signal }
+        );
+        setSession(response.data);
+        console.log("Result from the GET response: ", response.data);
+      } catch (error) {
+        console.error("Error fetching sessions:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (data) {
+      fetchSessions();
+    }
+  }, [data]);
+
   return (
     <>
       <NavBar />
@@ -32,7 +66,7 @@ const LiveSession = ({ data }: Props) => {
                 width="100%"
                 textAlign="center"
                 fontWeight="bold">
-                Buy-in: {data.buyin ? data.buyin : ""}
+                Buy-in: {session.map((s) => s.buyin)}
               </Box>
             </Center>
             <Center>
@@ -45,7 +79,7 @@ const LiveSession = ({ data }: Props) => {
                 width="100%"
                 textAlign="center"
                 fontWeight="bold">
-                Location: {data.location}
+                Location: {session.map((s) => s.location)}
               </Box>
             </Center>
             <Center>
@@ -59,7 +93,7 @@ const LiveSession = ({ data }: Props) => {
                 bg="blue.500"
                 textAlign="center"
                 fontWeight="bold">
-                Payment Type: {data.payType}
+                Payment Type: {session.map((s) => s.payType)}
               </Box>
               <Box
                 width="300px"

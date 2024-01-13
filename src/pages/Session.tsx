@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
 import FormData from "../components/FormData";
 
 interface Props {
@@ -45,13 +44,7 @@ const Session = ({ onFormSubmit }: Props) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData);
     onFormSubmit(formData);
-    console.log("THis is the uuid...", formData.sessionId);
-    axios.post<FormData, { message: string }>(
-      "http://localhost:8080/api/session/submit-session",
-      formData
-    );
     navigate("/livesession");
   };
 
@@ -148,6 +141,8 @@ const Session = ({ onFormSubmit }: Props) => {
                   textAlign="center"
                   type="number"
                   inputMode="numeric"
+                  placeholder="$Buy-in Amount"
+                  fontWeight="bold"
                   value={formData.buyin}
                   onChange={(e) =>
                     setFormData({
