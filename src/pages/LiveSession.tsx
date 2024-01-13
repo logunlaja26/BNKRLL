@@ -25,15 +25,14 @@ const LiveSession = ({ data }: Props) => {
       const controller = new AbortController();
       try {
         setLoading(true);
-
         const postResponse = await axios.post<FormData>(
-          "http://localhost:8080/api/session/submit-session",
+          "http://52.15.68.122:8080/api/session/submit-session",
           data
         );
         console.log("Result from the POST response: ", postResponse);
 
         const response = await axios.get<FormData[]>(
-          "http://localhost:8080/api/session",
+          "http://52.15.68.122:8080/api/session/1",
           { signal: controller.signal }
         );
         setSession(response.data);
