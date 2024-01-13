@@ -52,6 +52,7 @@ const LiveSession = ({ data }: Props) => {
   return (
     <>
       <NavBar />
+      {loading && <p>Loading...</p>}
       <VStack spacing={6} alignItems="center" p={4} bg="whitesmoke">
         <h1 style={{ color: "black" }}>Live Session Details</h1>
         <Container maxWidth="2xl" p={6} bg="white" borderRadius="md">
