@@ -29,7 +29,6 @@ const LiveSession = ({ data }: Props) => {
           "https://www.bnkrll-service.cloud/api/session/submit-session",
           data
         );
-        console.log("this is the data - ", data);
         console.log("Result from the POST response: ", postResponse);
 
         const response = await axios.get<FormData[]>(
