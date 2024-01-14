@@ -26,13 +26,14 @@ const LiveSession = ({ data }: Props) => {
       try {
         setLoading(true);
         const postResponse = await axios.post<FormData>(
-          "http://bnkrll-env.eba-pvi8mjjv.us-east-2.elasticbeanstalk.com/api/session/submit-session",
+          "https://www.bnkrll-service.cloud/api/session/submit-session",
           data
         );
+        console.log("this is the data - ", data);
         console.log("Result from the POST response: ", postResponse);
 
         const response = await axios.get<FormData[]>(
-          "http://bnkrll-env.eba-pvi8mjjv.us-east-2.elasticbeanstalk.com/api/session/1",
+          "https://www.bnkrll-service.cloud/api/session/1",
           { signal: controller.signal }
         );
         setSession(response.data);
@@ -47,7 +48,7 @@ const LiveSession = ({ data }: Props) => {
     if (data) {
       fetchSessions();
     }
-  }, [data]);
+  }, []);
 
   return (
     <>
