@@ -34,7 +34,7 @@ const LiveSession = ({ data }: Props) => {
       if (updatedBuyIn !== data.buyin) {
         // If updated, make a PUT request to update the buy-in
         await axios.patch<FormData>(
-          `http://localhost:8080/api/session/buy-in`,
+          `https://www.bnkrll-service.cloud/api/session/buy-in`,
           {
             buyin: updatedBuyIn,
             sessionId: session[0].sessionId,
@@ -43,7 +43,7 @@ const LiveSession = ({ data }: Props) => {
       }
 
       const response = await axios.get<FormData[]>(
-        "http://localhost:8080/api/session/1"
+        "https://www.bnkrll-service.cloud/api/session/1"
       );
 
       setSession(response.data);
@@ -65,7 +65,7 @@ const LiveSession = ({ data }: Props) => {
         setLoading(true);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const response = await axios.get<FormData[]>(
-          "http://localhost:8080/api/session/1",
+          "https://www.bnkrll-service.cloud/api/session/1",
           { signal: controller.signal }
         );
         setSession(response.data);

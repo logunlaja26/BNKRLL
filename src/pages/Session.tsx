@@ -56,7 +56,7 @@ const Session = ({ onFormSubmit }: Props) => {
     try {
       if (formData && formData.buyin && formData.location) {
         const postResponse = await axios.post<FormData>(
-          "http://localhost:8080/api/session/submit-session",
+          "https://www.bnkrll-service.cloud/api/session/submit-session",
           formData
         );
         console.log("Result from the POST response: ", postResponse);
