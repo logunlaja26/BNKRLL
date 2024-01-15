@@ -21,6 +21,5 @@ If you are developing a production application, we recommend updating the config
 
 
 ### **Demo** 🎥
-
-![image](https://github.com/logunlaja26/BNKRLL/assets/26635939/5b36d2d2-282f-491c-8f2b-cef4a5263c24)
+https://github.com/logunlaja26/BNKRLL/assets/26635939/5f785fa6-8487-4426-9437-c17faf7442dc
 
