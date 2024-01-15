@@ -22,4 +22,5 @@ If you are developing a production application, we recommend updating the config
 
 ### **Demo** 🎥
 
-![img.png](img.png)
+![image](https://github.com/logunlaja26/BNKRLL/assets/26635939/5b36d2d2-282f-491c-8f2b-cef4a5263c24)
+
