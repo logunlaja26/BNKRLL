@@ -12,6 +12,7 @@ import FormData from "../components/FormData";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UpdateBuyInModal from "../components/UpdateBuyInModal";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: FormData;
@@ -21,6 +22,11 @@ const LiveSession = ({ data }: Props) => {
   const [session, setSession] = useState<FormData[]>([]);
   const [loading, setLoading] = useState(false);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/session");
+  };
 
   const handleUpdateBuyIn = async (updatedBuyIn: number) => {
     try {
@@ -36,17 +42,15 @@ const LiveSession = ({ data }: Props) => {
         );
       }
 
-      // After updating or if no update is made, make a GET request to fetch the latest data
       const response = await axios.get<FormData[]>(
         "http://localhost:8080/api/session/1"
       );
 
-      // Update the session state with the latest data
       setSession(response.data);
     } catch (error) {
       console.error("Error updating buy-in:", error);
     } finally {
-      setUpdateModalOpen(false); // Close the modal after submitting the update
+      setUpdateModalOpen(false);
     }
   };
 
@@ -59,6 +63,7 @@ const LiveSession = ({ data }: Props) => {
       const controller = new AbortController();
       try {
         setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         const response = await axios.get<FormData[]>(
           "http://localhost:8080/api/session/1",
           { signal: controller.signal }
@@ -95,7 +100,6 @@ const LiveSession = ({ data }: Props) => {
                 width="100%"
                 textAlign="center"
                 fontWeight="bold"
-                onClick={handleOpenUpdateModal} // Open the modal when clicked
                 cursor="pointer">
                 Buy-in: {session.map((s) => s.buyin)}
               </Box>
@@ -158,13 +162,16 @@ const LiveSession = ({ data }: Props) => {
                 type="submit"
                 colorScheme="blue"
                 variant="solid"
-                size="lg">
-                Submit
+                size="lg"
+                onClick={handleOpenUpdateModal}
+                cursor="pointer">
+                Update
               </Button>
               <Button
                 type="submit"
                 colorScheme="blue"
                 variant="outline"
+                onClick={handleButtonClick}
                 size="lg">
                 Cancel
               </Button>
