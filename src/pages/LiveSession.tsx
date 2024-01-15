@@ -11,6 +11,7 @@ import NavBar from "../components/NavBar";
 import FormData from "../components/FormData";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import UpdateBuyInModal from "../components/UpdateBuyInModal";
 
 interface Props {
   data: FormData;
@@ -19,20 +20,47 @@ interface Props {
 const LiveSession = ({ data }: Props) => {
   const [session, setSession] = useState<FormData[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+
+  const handleUpdateBuyIn = async (updatedBuyIn: number) => {
+    try {
+      // Check if the buy-in is actually updated
+      if (updatedBuyIn !== data.buyin) {
+        // If updated, make a PUT request to update the buy-in
+        await axios.patch<FormData>(
+          `http://localhost:8080/api/session/buy-in`,
+          {
+            buyin: updatedBuyIn,
+            sessionId: session[0].sessionId,
+          }
+        );
+      }
+
+      // After updating or if no update is made, make a GET request to fetch the latest data
+      const response = await axios.get<FormData[]>(
+        "http://localhost:8080/api/session/1"
+      );
+
+      // Update the session state with the latest data
+      setSession(response.data);
+    } catch (error) {
+      console.error("Error updating buy-in:", error);
+    } finally {
+      setUpdateModalOpen(false); // Close the modal after submitting the update
+    }
+  };
+
+  const handleOpenUpdateModal = () => {
+    setUpdateModalOpen(true);
+  };
 
   useEffect(() => {
     const fetchSessions = async () => {
       const controller = new AbortController();
       try {
         setLoading(true);
-        const postResponse = await axios.post<FormData>(
-          "https://www.bnkrll-service.cloud/api/session/submit-session",
-          data
-        );
-        console.log("Result from the POST response: ", postResponse);
-
         const response = await axios.get<FormData[]>(
-          "https://www.bnkrll-service.cloud/api/session/1",
+          "http://localhost:8080/api/session/1",
           { signal: controller.signal }
         );
         setSession(response.data);
@@ -66,7 +94,9 @@ const LiveSession = ({ data }: Props) => {
                 bg="blue.500"
                 width="100%"
                 textAlign="center"
-                fontWeight="bold">
+                fontWeight="bold"
+                onClick={handleOpenUpdateModal} // Open the modal when clicked
+                cursor="pointer">
                 Buy-in: {session.map((s) => s.buyin)}
               </Box>
             </Center>
@@ -141,6 +171,13 @@ const LiveSession = ({ data }: Props) => {
             </VStack>
           </Center>
         </Container>
+        <UpdateBuyInModal
+          isOpen={isUpdateModalOpen}
+          onClose={() => setUpdateModalOpen(false)}
+          onSubmit={handleUpdateBuyIn}
+          currentBuyIn={data.buyin}
+          currentSessionId={data.sessionId}
+        />
       </VStack>
     </>
   );
