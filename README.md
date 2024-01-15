@@ -1,19 +1,17 @@
 # BNKRLL FRONTEND
+A friend challenged me, asking if I could build an app to manage poker sessions. I saw it as an opportunity to dive into new technologies like React and TypeScript
 
-## Expanding the ESLint configuration
+### **Learned**💡 
+- First hand experience of how race conditions happen and the fix in react. 
+- The usage of useEffect hook when making REST api calls. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### **Running the Project**🚦
+To run the project in your local environment, follow these steps:
+1. Clone the repository to your local machine.
+2. Run `npm install` in the project directory to install the required dependencies.
+3. Run `npm run dev` to get the project started.
+4. Open http://localhost:5173 (or the address shown in your console) in your web browser to view the app.4. 
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
 
 ### **Tools** 🛠️
 - React
