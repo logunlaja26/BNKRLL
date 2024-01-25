@@ -69,23 +69,19 @@ const Session = ({ onFormSubmit }: Props) => {
   return (
     <>
       <NavBar />
-      <VStack
-        spacing={6}
-        alignItems="center"
-        p={4}
-        bg="whitesmoke"
-        h="100vh"
-        justify="center">
-        <Heading>Start a live session</Heading>
-        <Container
-          //maxWidth="2xs"
-          maxWidth="md"
-          p={6}
-          bg="white"
-          borderRadius="md"
-          boxShadow="md">
-          <Center>
-            <form onSubmit={handleSubmit}>
+      <Container
+        maxWidth="md"
+        p={8}
+        bg="white"
+        borderRadius="md"
+        boxShadow="md">
+        <Center>
+          <form onSubmit={handleSubmit}>
+            <VStack spacing={4} width="100%">
+              <Heading size="lg" mb={6}>
+                Start a live session
+              </Heading>
+
               <FormControl>
                 <Menu>
                   <MenuButton
@@ -161,6 +157,7 @@ const Session = ({ onFormSubmit }: Props) => {
                   inputMode="numeric"
                   placeholder="$Buy-in Amount"
                   fontWeight="bold"
+                  p={2}
                   value={formData.buyin}
                   onChange={(e) =>
                     setFormData({
@@ -184,13 +181,13 @@ const Session = ({ onFormSubmit }: Props) => {
                   }
                 />
               </FormControl>
-              <Button type="submit" colorScheme="blue" mt={4}>
+              <Button type="submit" colorScheme="blue" mt={4} width="full">
                 Start Session
               </Button>
-            </form>
-          </Center>
-        </Container>
-      </VStack>
+            </VStack>
+          </form>
+        </Center>
+      </Container>
     </>
   );
 };
