@@ -30,9 +30,7 @@ const LiveSession = ({ data }: Props) => {
 
   const handleUpdateBuyIn = async (updatedBuyIn: number) => {
     try {
-      // Check if the buy-in is actually updated
       if (updatedBuyIn !== data.buyin) {
-        // If updated, make a PUT request to update the buy-in
         await axios.patch<FormData>(
           `https://www.bnkrll-service.cloud/api/session/buy-in`,
           {
