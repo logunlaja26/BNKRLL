@@ -167,8 +167,8 @@ const LiveSession = ({ data }: Props) => {
               </Button>
               <Button
                 type="submit"
-                colorScheme="blue"
-                variant="outline"
+                colorScheme="red"
+                variant="solid"
                 onClick={handleButtonClick}
                 size="lg">
                 Cancel
